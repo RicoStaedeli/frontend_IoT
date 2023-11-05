@@ -13,12 +13,12 @@ def index():
 
 @app.route('/sensors')
 def sensors():
-    api_url = "https://jsonplaceholder.typicode.com/posts/"
+    api_url = "https://pfistdo.pythonanywhere.com/poop/"
     response = requests.get(api_url)
     if response.status_code == 200:
         sensordata = response.json()
-        sensordata = getSnesorData()
-        return render_template('sensors.html',actualValue=sensordata.get("value"),catWeight=sensordata.get("catweight"))
+        print(sensordata)
+        return render_template('sensors.html',poops=sensordata)
     else:
         return render_template('sensors.html',weightSensorValue='Fehler')
 
@@ -35,3 +35,12 @@ def getSnesorData():
         "value": 12.156,
         "catweight": 3.12}
     return response
+
+
+# ###############################
+# Endpoints to push data to frontend
+# ###############################
+@app.route('/weightsensor')
+def event(data):
+    
+    return {},200
