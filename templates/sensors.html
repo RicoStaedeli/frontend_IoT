@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% block title %} Sonsors {% endblock %}</h1>
+<h1>{% block title %} Sensors {% endblock %}</h1>
 <div class="container">
     <div class="card" style="width: 18rem;">
         <img src="../static/ressources/loadcell.jpg" class="card-img-top" alt="Image of a loadcell">
         <div class="card-body">
             <h5 class="card-title">Weight Sensor</h5>
             <p class="card-text">This sensor meassures the weight of the cat and her shit</p>
-            <p class="card-text">Actual value: </p>
+            <p class="card-text">Actual value: {{ actualValue }}</p>
+            <p class="card-text">Cat weight: {{ catWeight }} kg</p>
             <a href="weightsensor" class="btn btn-primary">Open Data</a>
         </div>
     </div>
