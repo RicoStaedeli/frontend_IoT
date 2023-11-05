@@ -38,9 +38,6 @@ def getSnesorData():
 
 
 # ###############################
-# Endpoints to push data to frontend
+# Endpoints to push data
 # ###############################
-@app.route('/weightsensor')
-def event(data):
-    
-    return {},200
+

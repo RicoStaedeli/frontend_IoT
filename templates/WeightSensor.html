@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Weight Sensor {% endblock %}</h1>
+<h1>{% block title %} Weight Sensor {% endblock %}</h1>
+<div id="sensor-data"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io.connect('http://127.0.0.1:5001');
+
+    socket.on('connect', function () {
+        console.log('Connected to the backend!');
+    });
+
+    socket.on('sensor_data', function (msg) {
+        document.getElementById('sensorValue').textContent = msg.data;
+    });
+
+</script>
+<div class="d-flex flex-row mb-3">
+    <p class="p-2">Sensor Value: </p>
+    <p class="p-2" id="sensorValue">Waiting for data...</p>
+</div>
 {% endblock %}
