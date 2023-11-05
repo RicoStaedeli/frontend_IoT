@@ -13,8 +13,9 @@ def index():
 
 @app.route('/sensors')
 def sensors():
-    api_url = "https://pfistdo.pythonanywhere.com/poop/"
+    api_url = "https://pfistdo.pythonanywhere.com/poops/"
     response = requests.get(api_url)
+    print(response)
     if response.status_code == 200:
         sensordata = response.json()
         print(sensordata)
