@@ -10,6 +10,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/index')
+def index2():
+    return render_template('index.html')
+
 @app.route('/sensors')
 def sensors():
     api_url = "https://pfistdo.pythonanywhere.com/poops/"
@@ -17,7 +21,6 @@ def sensors():
     print(response)
     if response.status_code == 200:
         sensordata = response.json()
-        print(sensordata)
         return render_template('sensors.html',poops=sensordata)
     else:
         return render_template('sensors.html',weightSensorValue='Fehler')
@@ -30,7 +33,6 @@ def weightsensor():
     print(response)
     if response.status_code == 200:
         sensordata = response.json()
-        print(sensordata)
         return render_template('WeightSensor.html',poop=sensordata['weight'])
     else:
         return render_template('WeightSensor.html',weightSensorValue='Fehler')
@@ -38,12 +40,7 @@ def weightsensor():
 # ###############################
 # Helper Methods
 # ###############################
-def getSnesorData():
-    response = {
-        "sensorId": 564,
-        "value": 12.156,
-        "catweight": 3.12}
-    return response
+
 
 
 # ###############################
