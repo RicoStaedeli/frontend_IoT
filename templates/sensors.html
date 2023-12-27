@@ -8,12 +8,12 @@
         <h1 class="text-2xl font-bold tracking-tight text-gray-900">Loadcell {{ activeElement }}</h1>
         <div>
             <img src="{{ url_for('static', filename='ressources/loadcell.jpg') }}" class="h-auto w-fit rounded-lg" alt="Image of a loadcell">
-            <p>This sensor meassures the weight of the cat and her shit</p>
+            <p>This sensor meassures the weight of the cat and her poop</p>
             <p class="text-xl font-bold text-slate-900">Recent Data</p>
             <ul role="list" class="divide-y divide-slate-200">
-                {% for id in range(0, 10) %}
+                {% for poop in poops %}
                 <li class="flex py-4 first:pt-0 last:pb-0">
-                    <p class="text-sm font-medium text-slate-900">PoopId: {{ poops[id].ID_poop }} weight: {{ poops[id].weight }}
+                    <p class="text-sm font-medium text-slate-900">PoopId: {{ poop.ID_poop }} weight: {{ poop.weight }}
                     </p>
                 </li>
                 {% endfor %}

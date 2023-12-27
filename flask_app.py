@@ -17,25 +17,30 @@ def index2():
 @app.route('/sensors')
 def sensors():
     api_url = "https://pfistdo.pythonanywhere.com/poops/"
-    response = requests.get(api_url)
-    print(response)
-    if response.status_code == 200:
-        sensordata = response.json()
-        return render_template('sensors.html',poops=sensordata, activeElement='Sensors')
-    else:
-        return render_template('sensors.html',weightSensorValue='Fehler', activeElement='Sensors')
-
+    try:
+        response = requests.get(api_url)
+        print(response)
+        if response.status_code == 200:
+            sensordata = response.json()
+            return render_template('sensors.html',poops=sensordata, activeElement='Sensors')
+        else:
+            return render_template('sensors.html',poops=[], activeElement='Sensors')
+    except:
+        return render_template('sensors.html',poops=[], activeElement='Sensors')
 
 @app.route('/weightsensor')
 def weightsensor():
     api_url = "https://pfistdo.pythonanywhere.com/poop/1"
-    response = requests.get(api_url)
-    print(response)
-    if response.status_code == 200:
-        sensordata = response.json()
-        return render_template('WeightSensor.html',poop=sensordata['weight'], activeElement='Sensors')
-    else:
-        return render_template('WeightSensor.html',weightSensorValue='Fehler', activeElement='Sensors')
+    try:
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            sensordata = response.json()
+            return render_template('WeightSensor.html',poop=sensordata['weight'], activeElement='Sensors')
+        else:
+            return render_template('WeightSensor.html',weightSensorValue=0, activeElement='Sensors')
+    except:
+        print("An Error occured")
+        return render_template('WeightSensor.html',weightSensorValue=0, activeElement='Sensors')
 
 @app.route('/food')
 def food():
