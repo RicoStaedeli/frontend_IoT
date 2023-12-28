@@ -3,37 +3,154 @@
 {% block content %}
 <h1 class="text-4xl dark:text-white font-bold tracking-tight text-gray-900 p-4">{% block title %} Food {% endblock %}
 </h1>
-<form class="max-w-sm mx-auto" action="/submit" method="post">
-    <div class="mb-5">
-        <label for="food_name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Name of Food</label>
-        <input type="text" id="food_name" name="food_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-    </div>
-    <div class="mb-5">
-        <label for="food_weight" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Weight</label>
-        <input name="food_weight" type="number" step="0.01" id="food_weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-    </div>
-    <div class="mb-5">
-        <label for="food_brand" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Brand</label>
-        <input name="food_brand" type="text" id="food_brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-    </div>
+<hr>
+<div class="flex flex-row">
+    <div class="basis-1/2">
+        <h1 class="text-lg dark:text-white font-bold tracking-tight text-gray-900 p-4"> Add a foodenty</h1>
+        <form class="max-w-sm mx-auto" action="/submit" method="post">
+            <div class="mb-3">
+                <label for="food_name" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Name of
+                    Food</label>
+                <input type="text" id="food_name" name="food_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
 
-    <div class="mb-5">
-        <label for="food_time" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Feeding Time</label>
-        <input name="food_time" type="time" id="food_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+            <div class="mb-3">
+                <label for="food_weight"
+                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Weight</label>
+                <input name="food_weight" type="number" step="0.01" id="food_weight"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="food_fat" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Fat</label>
+                <input name="food_fat" type="number" step="0.01" id="food_fat"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="food_moisture"
+                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Moisture</label>
+                <input name="food_moisture" type="number" step="0.01" id="food_moisture"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="food_ash" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Ash</label>
+                <input name="food_ash" type="number" step="0.01" id="food_ash"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="food_fibres"
+                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Fibres</label>
+                <input name="food_fibres" type="number" step="0.01" id="food_fibres"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="food_protein"
+                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Protein</label>
+                <input name="food_protein" type="number" step="0.01" id="food_protein"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="food_brand"
+                    class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Brand</label>
+                <input name="food_brand" type="text" id="food_brand"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="food_time" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Feeding
+                    Time</label>
+                <input name="food_time" type="time" id="food_time"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required>
+            </div>
+
+            <label for="food_meat" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Meat</label>
+            <select id="food_meat" name="food_meat"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required>
+
+                <option value="Fruits">Horse</option>
+                <option value="Vegetables">Chicken</option>
+                <option value="Meat">Beef</option>
+                <option value="Dairy">Salmon</option>
+                <option value="Grains">Pork</option>
+                <option value="Other">Other</option>
+            </select><br><br>
+
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit
+                Food</button>
+        </form>
     </div>
+    <div class="basis-1/2">
+        <h1 class="text-lg dark:text-white font-bold tracking-tight text-gray-900 pt-4 pb-4"> Foodlist</h1>
+        <div class="overflow-x-auto shadow-md sm:rounded-lg mr-4">
+            <div class="inline-block min-w-full align-middle">
+                <div class="overflow-hidden ">
+                    <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+                        <thead class="bg-gray-100 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Name
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Meat
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Protein
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Fat
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Ash
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Fibres
+                                </th>
+                                <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Moisture
+                                </th>
+                                <th scope="col" class="p-4">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">Whiskas</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">Pork</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">1.8</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">8.9</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">4.1</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">4.5</td>
+                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">3</td>
+                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
 
-    <label for="food_category" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Select Category</label>
-    <select id="food_category" name="food_category"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
 
-        <option value="Fruits">Fruits</option>
-        <option value="Vegetables">Vegetables</option>
-        <option value="Meat">Meat</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Grains">Grains</option>
-        <option value="Other">Other</option>
-    </select><br><br>
-
-    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit Food</button>
-</form>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import requests
 
 app = Flask(__name__)
@@ -57,21 +57,34 @@ def food():
 # ###############################
 @app.route('/submit', methods=['POST'])
 def submit():
-    food_data = []
     food_name = request.form['food_name']
     food_weight = request.form['food_weight']
-    food_category = request.form['food_category']
+    food_meat = request.form['food_meat']
     food_brand = request.form['food_brand']
     food_time = request.form['food_time']
+    food_protein = request.form['food_protein']
+    food_fat = request.form['food_fat']
+    food_ash = request.form['food_ash']
+    food_fibres = request.form['food_fibres']
+    food_moisture = request.form['food_moisture']
+
 
     food_entry = {
-        'name': food_name,
-        'weight': food_weight,
-        'category': food_category,
-        'brand': food_brand,
+        'name': food_name,        
+        'meat': food_meat,
+        'protein': food_protein,
+        'fat': food_fat,
+        'ash': food_ash,
+        'fibres': food_fibres,
+        'moisture': food_moisture,
         'time': food_time
     }
 
-    food_data.append(food_entry)
-    print(food_data)
-    return redirect(url_for('index'))
+    # Post the data to the specified URL
+    url = "https://poop-tracker-48b06530794b.herokuapp.com/foods/"
+    response = requests.post(url, json=food_entry)
+
+    if response.status_code == 200:
+        return redirect(url_for('index'))
+    else:
+        return jsonify({"message": "Failed to post data."}), 500
