@@ -16,7 +16,7 @@ def index2():
 
 @app.route('/sensors')
 def sensors():
-    api_url = "https://pfistdo.pythonanywhere.com/poops/"
+    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/poops/"
     try:
         response = requests.get(api_url)
         print(response)
@@ -30,7 +30,7 @@ def sensors():
 
 @app.route('/weightsensor')
 def weightsensor():
-    api_url = "https://pfistdo.pythonanywhere.com/poop/1"
+    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/poop/1"
     try:
         response = requests.get(api_url)
         if response.status_code == 200:
@@ -44,7 +44,18 @@ def weightsensor():
 
 @app.route('/food')
 def food():
-    return render_template('food.html', activeElement='Food')
+    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/foods/"
+    try:
+        response = requests.get(api_url)
+        if response.status_code == 200:
+            foods = response.json()
+            return render_template('food.html',foods=foods, activeElement='Food')
+        else:
+            return jsonify({"message": "Failed to post data."}), 500
+    except:
+        print("An Error occured")
+        return jsonify({"message": "Failed to post data."}), 500
+
 
 # ###############################
 # Helper Methods
@@ -85,6 +96,6 @@ def submit():
     response = requests.post(url, json=food_entry)
 
     if response.status_code == 200:
-        return redirect(url_for('index'))
+        return redirect(url_for('food'))
     else:
         return jsonify({"message": "Failed to post data."}), 500
