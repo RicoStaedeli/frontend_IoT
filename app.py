@@ -56,6 +56,19 @@ def food():
         print("An Error occured")
         return jsonify({"message": "Failed to post data."}), 500
 
+@app.route('/feeding')
+def feeding():
+    api_url_foods = "https://poop-tracker-48b06530794b.herokuapp.com/foods/"
+    try:
+        response_food = requests.get(api_url_foods)
+        if response_food.status_code == 200:
+            foods = response_food.json()
+            return render_template('feeding.html',foods=foods, activeElement='Feeding')
+        else:
+            return jsonify({"message": "Failed to load data."}), 500
+    except:
+        print("An Error occured")
+        return jsonify({"message": "Failed to load data."}), 500
 
 # ###############################
 # Helper Methods
@@ -97,5 +110,44 @@ def submit():
 
     if response.status_code == 200:
         return redirect(url_for('food'))
+    else:
+        return jsonify({"message": "Failed to post data."}), 500
+    
+
+@app.route('/submit_feeding', methods=['POST'])
+def submit_feeding():
+    id_food = request.form['food_id']
+    food_time = request.form['food_time']
+
+    feeiding_entry = {
+        'ID_feeding': id_food,
+        'time': food_time
+    }
+
+    # Post the data to the specified URL
+    url = "https://poop-tracker-48b06530794b.herokuapp.com/feeding/"
+    response = requests.post(url, json=feeiding_entry)
+
+    if response.status_code == 200:
+        return redirect(url_for('feeding'))
+    else:
+        return jsonify({"message": "Failed to post data."}), 500
+    
+@app.route('/submit_subscribing', methods=['POST'])
+def submit_subscribing():
+    subscriber_name = request.form['subscriber_name']
+    subscriber_phone = request.form['subscriber_phone']
+
+    feeiding_entry = {
+        'subscriber_name': subscriber_name,
+        'subscriber_phone': subscriber_phone
+    }
+
+    # Post the data to the specified URL
+    url = "https://poop-tracker-48b06530794b.herokuapp.com/feeding/"
+    response = requests.post(url, json=feeiding_entry)
+
+    if response.status_code == 200:
+        return redirect(url_for('feeding'))
     else:
         return jsonify({"message": "Failed to post data."}), 500
