@@ -18,7 +18,7 @@
             </div>
 
             <label for="food_id" class="block text-lg font-medium text-gray-900 dark:text-white">Food</label>
-            <select id="foodfood_id_meat" name="food_id"
+            <select id="food_id" name="food_id"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required>
                 {% for food in foods %}
@@ -26,7 +26,19 @@
                     <option value="{{ food.ID_food }}"> {{ food.name }} </option>
                 </tr>
                 {% endfor %}
-            </select><br><br>
+            </select>
+
+            <label for="cat_id" class="block text-lg font-medium text-gray-900 dark:text-white">Cat</label>
+            <select id="cat_id" name="cat_id"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required>
+                {% for cat in cats %}
+                <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <option value="{{ cat.ID_cat }}"> {{ cat.name }} </option>
+                </tr>
+                {% endfor %}
+            </select><br>
+            <br>
 
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit
@@ -41,6 +53,10 @@
                     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                         <thead class="bg-gray-100 dark:bg-gray-700">
                             <tr>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Cat
+                                </th>
                                 <th scope="col"
                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                     Name
@@ -69,38 +85,43 @@
                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                     Moisture
                                 </th>
-                                <th scope="col" class="p-4">
-                                    <span class="sr-only">Edit</span>
+                                <th scope="col"
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    Time
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                            {% for food in foods %}
+                            {% for feeding in feedings %}
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ food.name }}</td>
+                                    {{ feeding.cat.name }}</td>
+                                <td
+                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ feeding.food.name }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                    {{ food.meat }}</td>
+                                    {{ feeding.food.meat }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ food.protein }}</td>
+                                    {{ feeding.food.protein }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ food.fat }}</td>
+                                    {{ feeding.food.fat }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ food.ash }}</td>
+                                    {{ feeding.food.ash }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ food.fibres }}</td>
+                                    {{ feeding.food.fibres }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ food.moisture }}</td>
-                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                    <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                </td>
+                                    {{ feeding.food.moisture }}</td>
+                                <td
+                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ feeding.timestamp }}</td>
+
                             </tr>
                             {% endfor %}
 

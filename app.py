@@ -16,13 +16,15 @@ def index2():
 
 @app.route('/sensors')
 def sensors():
-    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/poops/"
+    api_url_poops = "https://poop-tracker-48b06530794b.herokuapp.com/poops/5"
+    api_url_air = "https://poop-tracker-48b06530794b.herokuapp.com/air_qualities/5"
     try:
-        response = requests.get(api_url)
-        print(response)
-        if response.status_code == 200:
-            sensordata = response.json()
-            return render_template('sensors.html',poops=sensordata, activeElement='Sensors')
+        response_poops = requests.get(api_url_poops)
+        response_air = requests.get(api_url_air)
+        if response_poops.status_code == 200 and response_air.status_code == 200:
+            poops = response_poops.json()
+            airs = response_air.json()
+            return render_template('sensors.html',poops=poops,airs=airs, activeElement='Sensors')
         else:
             return render_template('sensors.html',poops=[], activeElement='Sensors')
     except:
@@ -59,11 +61,17 @@ def food():
 @app.route('/feeding')
 def feeding():
     api_url_foods = "https://poop-tracker-48b06530794b.herokuapp.com/foods/"
+    api_url_cats = "https://poop-tracker-48b06530794b.herokuapp.com/cats/"
+    api_url_feedings = "https://poop-tracker-48b06530794b.herokuapp.com/feedings/"
     try:
         response_food = requests.get(api_url_foods)
-        if response_food.status_code == 200:
+        response_cats = requests.get(api_url_cats)
+        response_feedings = requests.get(api_url_feedings)
+        if response_food.status_code == 200 and response_cats.status_code == 200 and response_feedings.status_code == 200:
             foods = response_food.json()
-            return render_template('feeding.html',foods=foods, activeElement='Feeding')
+            cats = response_cats.json()
+            feedings = response_feedings.json()
+            return render_template('feeding.html',foods=foods,feedings=feedings,cats=cats, activeElement='Feeding')
         else:
             return jsonify({"message": "Failed to load data."}), 500
     except:
@@ -82,10 +90,7 @@ def feeding():
 @app.route('/submit', methods=['POST'])
 def submit():
     food_name = request.form['food_name']
-    food_weight = request.form['food_weight']
     food_meat = request.form['food_meat']
-    food_brand = request.form['food_brand']
-    food_time = request.form['food_time']
     food_protein = request.form['food_protein']
     food_fat = request.form['food_fat']
     food_ash = request.form['food_ash']
@@ -101,7 +106,6 @@ def submit():
         'ash': food_ash,
         'fibres': food_fibres,
         'moisture': food_moisture,
-        'time': food_time
     }
 
     # Post the data to the specified URL
@@ -117,15 +121,17 @@ def submit():
 @app.route('/submit_feeding', methods=['POST'])
 def submit_feeding():
     id_food = request.form['food_id']
+    id_cat = request.form['cat_id']
     food_time = request.form['food_time']
 
     feeiding_entry = {
-        'ID_feeding': id_food,
-        'time': food_time
+        'food_ID': id_food,
+        'cat_ID': id_cat
+        #'time': food_time
     }
 
     # Post the data to the specified URL
-    url = "https://poop-tracker-48b06530794b.herokuapp.com/feeding/"
+    url = "https://poop-tracker-48b06530794b.herokuapp.com/feedings/"
     response = requests.post(url, json=feeiding_entry)
 
     if response.status_code == 200:
@@ -138,16 +144,16 @@ def submit_subscribing():
     subscriber_name = request.form['subscriber_name']
     subscriber_phone = request.form['subscriber_phone']
 
-    feeiding_entry = {
-        'subscriber_name': subscriber_name,
-        'subscriber_phone': subscriber_phone
+    subscriber_entry = {
+        'name': subscriber_name,
+        'telnr': subscriber_phone
     }
 
     # Post the data to the specified URL
-    url = "https://poop-tracker-48b06530794b.herokuapp.com/feeding/"
-    response = requests.post(url, json=feeiding_entry)
+    url = "https://poop-tracker-48b06530794b.herokuapp.com/telephone_numbers/"
+    response = requests.post(url, json=subscriber_entry)
 
     if response.status_code == 200:
-        return redirect(url_for('feeding'))
+        return redirect(url_for('index'))
     else:
         return jsonify({"message": "Failed to post data."}), 500

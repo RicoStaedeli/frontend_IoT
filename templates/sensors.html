@@ -6,7 +6,7 @@
 <hr>
 <div class="flex flex-row">
     <div class="basis-1/4 dark:bg-slate-400 p-4 m-4 rounded-lg shadow-2xl">
-        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Loadcell</h1>
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Loadcell - Poops</h1>
         <div>
             <img src="{{ url_for('static', filename='ressources/loadcell.jpg') }}" class="h-auto w-fit rounded-lg" alt="Image of a loadcell">
             <p>This sensor meassures the weight of the cat and her poop</p>
@@ -14,7 +14,41 @@
             <ul role="list" class="divide-y divide-slate-200">
                 {% for poop in poops %}
                 <li class="flex py-4 first:pt-0 last:pb-0">
-                    <p class="text-sm font-medium text-slate-900">PoopId: {{ poop.ID_poop }} weight: {{ poop.weight }}
+                    <p class="text-sm font-medium text-slate-900"><b>PoopId: </b>{{ poop.ID_poop }} <b>weight: </b>{{ poop.weight }}
+                    </p>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="weightsensor"
+                class="relative inline-flex items-center justify-center mt-2 px-6 py-3 overflow-hidden font-bold text-white rounded-md shadow-2xl group">
+                <span
+                    class="absolute inset-0 w-full h-full transition duration-300 ease-out opacity-0 bg-gradient-to-br from-pink-600 via-purple-700 to-blue-400 group-hover:opacity-100"></span>
+                <span
+                    class="absolute top-0 left-0 w-full bg-gradient-to-b from-white to-transparent opacity-5 h-1/3"></span>
+                <span
+                    class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-white to-transparent opacity-5"></span>
+                <span
+                    class="absolute bottom-0 left-0 w-4 h-full bg-gradient-to-r from-white to-transparent opacity-5"></span>
+                <span
+                    class="absolute bottom-0 right-0 w-4 h-full bg-gradient-to-l from-white to-transparent opacity-5"></span>
+                <span class="absolute inset-0 w-full h-full border border-white rounded-md opacity-10"></span>
+                <span
+                    class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-5"></span>
+                <span class="relative">Open Data</span>
+            </a>
+
+        </div>
+    </div>
+    <div class="basis-1/4 dark:bg-slate-400 p-4 m-4 rounded-lg shadow-2xl">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Gassensor</h1>
+        <div>
+            <img src="{{ url_for('static', filename='ressources/loadcell.jpg') }}" class="h-auto w-fit rounded-lg" alt="Image of a loadcell">
+            <p>This sensor meassures the air quality on the cat toilet</p>
+            <p class="text-xl font-bold text-slate-900">Recent Data</p>
+            <ul role="list" class="divide-y divide-slate-200">
+                {% for air in airs %}
+                <li class="flex py-4 first:pt-0 last:pb-0">
+                    <p class="text-sm font-medium text-slate-900"><b>Id: </b>{{ air.ID_air_quality }} <b>lpg: </b>{{ air.lpg }} <b>co: </b>{{ air.co }} <b>smoke: </b>{{ air.smoke }}
                     </p>
                 </li>
                 {% endfor %}
