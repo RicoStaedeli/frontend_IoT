@@ -1,27 +1,27 @@
-const jsonData =  [
+const jsonData = [
   {
-      "ID_poop": 31,
-      "weight": 15,
-      "timestamp": "2024-01-02T13:11:53.326439",
-      "feeding_ID": 1
+    "ID_poop": 31,
+    "weight": 15,
+    "timestamp": "2024-01-02T13:11:53.326439",
+    "feeding_ID": 1
   },
   {
-      "ID_poop": 32,
-      "weight": 18,
-      "timestamp": "2024-01-03T13:11:53.326439",
-      "feeding_ID": 1
+    "ID_poop": 32,
+    "weight": 18,
+    "timestamp": "2024-01-03T13:11:53.326439",
+    "feeding_ID": 1
   },
   {
-      "ID_poop": 33,
-      "weight": 18,
-      "timestamp": "2024-01-03T18:11:53.326439",
-      "feeding_ID": 1
+    "ID_poop": 33,
+    "weight": 18,
+    "timestamp": "2024-01-03T18:11:53.326439",
+    "feeding_ID": 1
   },
   {
-      "ID_poop": 34,
-      "weight": 18,
-      "timestamp": "2024-01-05T13:11:53.326439",
-      "feeding_ID": 1
+    "ID_poop": 34,
+    "weight": 18,
+    "timestamp": "2024-01-05T13:11:53.326439",
+    "feeding_ID": 1
   }
 ]
 
@@ -75,8 +75,9 @@ for (const entry of inputJSON) {
   if (!catData[catID][date]) {
     catData[catID][date] = [];
     catData[catID][date].push({
-      "date":date,
-      "weight": entry.weight,})
+      "date": date,
+      "weight": entry.weight,
+    })
   }
 }
 
@@ -86,18 +87,14 @@ const timestamps_cat = [];
 const weights_cat = [];
 
 for (date in weightvalues_cat_1) {
-    if (weightvalues_cat_1.hasOwnProperty(date)) {
-      timestamps_cat.push(date);
-        weights_cat.push(weightvalues_cat_1[date][0].weight);
-    }
+  if (weightvalues_cat_1.hasOwnProperty(date)) {
+    timestamps_cat.push(date);
+    weights_cat.push(weightvalues_cat_1[date][0].weight);
+  }
 }
 
 
-
-
-
-
-function loadPoopsData(){
+function loadPoopsData() {
 
 }
 
@@ -119,21 +116,21 @@ function aggregateWeightByDay(data) {
 const result = aggregateWeightByDay(jsonData);
 
 // Create arrays for days and weights
-const days = Object.keys(result);
-const weights = Object.values(result);
+const days_poops = Object.keys(result);
+const weights_poops = Object.values(result);
 
 /* Chart initialisations */
 /* Line Chart */
 var config = {
   type: "line",
   data: {
-    labels: days,
+    labels: days_poops,
     datasets: [
       {
         label: "Poops",
         backgroundColor: "#4c51bf",
         borderColor: "#4c51bf",
-        data: weights,
+        data: weights_poops,
         fill: false,
       },
       {
@@ -220,13 +217,13 @@ var config = {
 var config_poop = {
   type: "bar",
   data: {
-    labels: days,
+    labels: days_poops,
     datasets: [
       {
         label: "Poops",
         backgroundColor: "#4c51bf",
         borderColor: "#4c51bf",
-        data: weights,
+        data: weights_poops,
         fill: false,
       }
     ],
@@ -389,6 +386,36 @@ var config_cat = {
   },
 };
 
+function createObjectFromDayValueArrays(dayArray, valueArray) {
+  var generatedObject = [];
+
+  for (let i = 0; i < dayArray.length; i++) {
+    day = dayArray[i];
+    value = valueArray[i];
+
+    obj = { "day": day, "value": value }; // Create an object with "day" and "value" properties
+    generatedObject.push(obj); // Push the object into the result array
+  }
+
+  return generatedObject;
+}
+
+
+function creteKeyValuePairForEachDay(allDays, valueArray) {
+  keyValueObject = []
+  allDays.forEach((day) => {
+    foundEntry = valueArray.find(entry => entry.day === day);
+    if (foundEntry == null) {
+      obj = { "day": day, "value": 0 };
+      keyValueObject.push(obj)
+    } else {
+      obj = { "day": day, "value": foundEntry.value };
+      keyValueObject.push(obj)
+    }
+  })
+
+  return keyValueObject
+}
 
 function findFirstAndLastDays(inputArray) {
   // Convert the input array to an array of Date objects
@@ -413,21 +440,47 @@ function findFirstAndLastDays(inputArray) {
   return resultArray;
 }
 
-days_overview = findFirstAndLastDays(timestamps_cat)
-console.log(days_overview)
+
+poops_values = createObjectFromDayValueArrays(days_poops, weights_poops)
+cats_values = createObjectFromDayValueArrays(timestamps_cat, weights_cat)
+allDays_Poops_Cats = timestamps_cat.concat(days_poops)
+days_overview = findFirstAndLastDays(allDays_Poops_Cats)
+
+dataForChart_poop = creteKeyValuePairForEachDay(days_overview, poops_values)
+dataForChart_cats = creteKeyValuePairForEachDay(days_overview, cats_values)
+
+function createArraysForChart(data) {
+  valuesArray = [];
+
+  data.forEach(item => {
+    valuesArray.push(item.value);
+  });
+  return valuesArray;
+}
+
+owerview_poopsvalues = createArraysForChart(dataForChart_poop)
+overview_catsvalues = createArraysForChart(dataForChart_cats)
 
 var config_overview = {
-  type: "line",
   data: {
-    labels: timestamps_cat,
+    labels: days_overview,
     datasets: [
       {
-        label: "Joe",
+        type:"bar",
+        label: "Poop",
         backgroundColor: "#4c51bf",
         borderColor: "#4c51bf",
-        data: weights_cat,
+        data: owerview_poopsvalues,
         fill: false,
-      }
+      },
+      {
+        type: "line",
+        label: "Joe",
+        fill: false,
+        backgroundColor: "#ed64a6",
+        borderColor: "#ed64a6",
+        data: overview_catsvalues,
+      },
     ],
   },
   options: {
