@@ -94,9 +94,40 @@ for (date in weightvalues_cat_1) {
 }
 
 
-function loadPoopsData() {
+async function loadPoopsData() {
+  /*fetch("https://poop-tracker-48b06530794b.herokuapp.com/poops", {
+    mode: 'no-cors'
+  }).then((response) => response.json())
+    .then((json) => console.log(json));
+  fetch('https://poop-tracker-48b06530794b.herokuapp.com/poops', {
+    mode: 'no-cors'
+  })
+    .then(response => console.log(response))
+    .catch(error => console.error(error));*/
+
+  fetch('https://poop-tracker-48b06530794b.herokuapp.com/poops', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+    .then(response => {
+      console.log(response)
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data); // Handle the response data here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 
 }
+
+loadPoopsData()
 
 function aggregateWeightByDay(data) {
   const aggregatedData = {};
@@ -466,7 +497,7 @@ var config_overview = {
     labels: days_overview,
     datasets: [
       {
-        type:"bar",
+        type: "bar",
         label: "Poop",
         backgroundColor: "#4c51bf",
         borderColor: "#4c51bf",
