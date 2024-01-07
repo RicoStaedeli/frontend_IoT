@@ -7,4 +7,5 @@ socket.on('connect', function () {
 
 socket.on('sensor_data', function (msg) {
     document.getElementById('sensorValue').textContent = msg.data + " grams";
+    
 });

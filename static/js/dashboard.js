@@ -1,4 +1,4 @@
-const jsonData = [
+/*const jsonData = [
   {
     "ID_poop": 31,
     "weight": 15,
@@ -23,7 +23,7 @@ const jsonData = [
     "timestamp": "2024-01-05T13:11:53.326439",
     "feeding_ID": 1
   }
-]
+]*/
 
 const inputJSON = [
   {
@@ -63,7 +63,7 @@ const catData = {};
 
 // Iterate through the input JSON
 for (const entry of inputJSON) {
-  const catID = entry.ID_cat;
+  const catID = entry.cat_ID;
   const date = entry.timestamp.split('T')[0];
 
   // Initialize the cat entry if it doesn't exist
@@ -93,41 +93,17 @@ for (date in weightvalues_cat_1) {
   }
 }
 
+async function loadData(url) {
+  const response = await fetch(url);
 
-async function loadPoopsData() {
-  /*fetch("https://poop-tracker-48b06530794b.herokuapp.com/poops", {
-    mode: 'no-cors'
-  }).then((response) => response.json())
-    .then((json) => console.log(json));
-  fetch('https://poop-tracker-48b06530794b.herokuapp.com/poops', {
-    mode: 'no-cors'
-  })
-    .then(response => console.log(response))
-    .catch(error => console.error(error));*/
+  if (!response.ok) {
+    const message = `An error has occured: ${response.status}`;
+    throw new Error(message);
+  }
 
-  fetch('https://poop-tracker-48b06530794b.herokuapp.com/poops', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-    .then(response => {
-      console.log(response)
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data); // Handle the response data here
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-
+  const requested_data = await response.json();
+  return requested_data;
 }
-
-loadPoopsData()
 
 function aggregateWeightByDay(data) {
   const aggregatedData = {};
@@ -144,24 +120,20 @@ function aggregateWeightByDay(data) {
   return aggregatedData;
 }
 
-const result = aggregateWeightByDay(jsonData);
 
-// Create arrays for days and weights
-const days_poops = Object.keys(result);
-const weights_poops = Object.values(result);
 
 /* Chart initialisations */
 /* Line Chart */
 var config = {
   type: "line",
   data: {
-    labels: days_poops,
+    labels: [],
     datasets: [
       {
         label: "Poops",
         backgroundColor: "#4c51bf",
         borderColor: "#4c51bf",
-        data: weights_poops,
+        data: [],
         fill: false,
       },
       {
@@ -248,13 +220,13 @@ var config = {
 var config_poop = {
   type: "bar",
   data: {
-    labels: days_poops,
+    labels: [],
     datasets: [
       {
         label: "Poops",
         backgroundColor: "#4c51bf",
         borderColor: "#4c51bf",
-        data: weights_poops,
+        data: [],
         fill: false,
       }
     ],
@@ -589,13 +561,30 @@ var config_overview = {
 var ctx_overview = document.getElementById("line-chart-overview").getContext("2d");
 new Chart(ctx_overview, config_overview);
 
-var ctx = document.getElementById("line-chart-poop").getContext("2d");
-new Chart(ctx, config_poop);
+
 
 var ctx2 = document.getElementById("line-chart-cat").getContext("2d");
 new Chart(ctx2, config_cat);
 
-
 var ctx3 = document.getElementById("line-chart-gas").getContext("2d");
 new Chart(ctx3, config);
 
+async function createPoopsGraph() {
+  var data_poop = await loadData("https://poop-tracker-48b06530794b.herokuapp.com/poops")
+
+  poop_data_per_day = aggregateWeightByDay(jsonData);
+
+  // Create arrays for days and weights
+  days_poops = Object.keys(poop_data_per_day);
+  weights_poops = Object.values(poop_data_per_day);
+
+  config_poop.data.labels = days_poops;
+  config_poop.data.datasets[0].data = weights_poops;
+
+  var ctx = document.getElementById("line-chart-poop").getContext("2d");
+  new Chart(ctx, config_poop);
+
+  console.log(data_poop)
+}
+
+createPoopsGraph()
