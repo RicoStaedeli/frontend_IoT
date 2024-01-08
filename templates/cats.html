@@ -5,9 +5,9 @@
 </h1>
 <hr>
 <div class="flex flex-row">
-    <div class="basis-1/2">
-        <h1 class="text-lg dark:text-white font-bold tracking-tight text-gray-900 p-4"> Add a feeding entry</h1>
-        <form class="max-w-sm ml-4" action="/submit_cats" method="post">
+    <div class="basis-1/2 dark:bg-slate-400 p-4 m-4 rounded-lg shadow-2xl">
+        <h1 class="text-xl font-bold tracking-tight text-gray-900">  Add a cat</h1>
+        <form class="max-w-sm mx-auto" action="/submit_cat" method="post">
 
             <div class="mb-3">
                 <label for="cat_name" class="block text-lg font-medium text-gray-900 dark:text-white">Cat Name</label>
@@ -28,10 +28,10 @@
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required>
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <option value="M"> Männlich </option>
+                    <option value="Male"> Male </option>
                 </tr>
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <option value="W"> Weiblich </option>
+                    <option value="Female"> Female </option>
                 </tr>
             </select>
             <div class="mb-3">
@@ -40,15 +40,15 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
             </div>
-            <label for="cat_chip" class="block text-lg font-medium text-gray-900 dark:text-white">Sex</label>
+            <label for="cat_chip" class="block text-lg font-medium text-gray-900 dark:text-white">Chip</label>
             <select id="cat_chip" name="cat_chip"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required>
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <option value="1"> Chiped </option>
+                    <option value="1"> Chipped </option>
                 </tr>
                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <option value="0"> Not Chiped </option>
+                    <option value="0"> Not chipped </option>
                 </tr>
             </select>
             <br>
@@ -60,7 +60,7 @@
         </form>
     </div>
     <div class="basis-1/2">
-        <h1 class="text-lg dark:text-white font-bold tracking-tight text-gray-900 pt-4 pb-4"> Foodlist</h1>
+        <h1 class="text-lg dark:text-white font-bold tracking-tight text-gray-900 pt-4 pb-4"> Cats</h1>
         <div class="overflow-x-auto shadow-md sm:rounded-lg mr-4">
             <div class="inline-block min-w-full align-middle">
                 <div class="overflow-hidden ">
@@ -69,73 +69,44 @@
                             <tr>
                                 <th scope="col"
                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Cat
-                                </th>
-                                <th scope="col"
-                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                     Name
                                 </th>
                                 <th scope="col"
                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Meat
+                                    Color
                                 </th>
                                 <th scope="col"
                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Protein
+                                    Birthdate
                                 </th>
                                 <th scope="col"
                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Fat
+                                    Gender
                                 </th>
                                 <th scope="col"
                                     class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Ash
-                                </th>
-                                <th scope="col"
-                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Fibres
-                                </th>
-                                <th scope="col"
-                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Moisture
-                                </th>
-                                <th scope="col"
-                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                    Time
+                                    Chipped
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                            {% for feeding in feedings %}
+                            {% for cat in cats %}
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.cat.name }}</td>
+                                    {{ cat.name }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.food.name }}</td>
+                                    {{ cat.color }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-                                    {{ feeding.food.meat }}</td>
+                                    {{ cat.birthdate }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.food.protein }}</td>
+                                    {{ cat.gender }}</td>
                                 <td
                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.food.fat }}</td>
-                                <td
-                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.food.ash }}</td>
-                                <td
-                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.food.fibres }}</td>
-                                <td
-                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.food.moisture }}</td>
-                                <td
-                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ feeding.timestamp }}</td>
-
+                                    {{ cat.chipped }}</td>
                             </tr>
                             {% endfor %}
 

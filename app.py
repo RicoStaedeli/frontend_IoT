@@ -174,3 +174,31 @@ def submit_subscribing():
         return redirect(url_for('index'))
     else:
         return jsonify({"message": "Failed to post data."}), 500
+    
+@app.route('/submit_cat', methods=['POST'])
+def submit_cat():
+    cat_name = request.form['cat_name']
+    cat_color = request.form['cat_color']
+    cat_sex = request.form['cat_sex']
+    cat_birthday = request.form['cat_birthday']
+    cat_chip = request.form['cat_chip']
+
+
+    cat_entry = {
+        'name': cat_name,
+        'gender': cat_sex,
+        'birthdate': cat_birthday,
+        'chipped': cat_chip,
+        'color': cat_color
+    }
+
+    # Post the data to the specified URL
+    url = "https://poop-tracker-48b06530794b.herokuapp.com/cats/"
+    response = requests.post(url, json=cat_entry)
+
+    if response.status_code == 200:
+        return redirect(url_for('index'))
+    else:
+        return jsonify({"message": "Failed to post data."}), 500
+
+
