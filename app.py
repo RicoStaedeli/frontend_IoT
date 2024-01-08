@@ -57,6 +57,23 @@ def food():
     except:
         print("An Error occured")
         return jsonify({"message": "Failed to post data."}), 500
+    
+@app.route('/cat')
+def cats():
+    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/foods/"
+    api_url_cats = "https://poop-tracker-48b06530794b.herokuapp.com/cats/"
+    try:
+        response = requests.get(api_url)
+        response_cats = requests.get(api_url_cats)
+        if response.status_code == 200 and response_cats.status_code == 200:
+            foods = response.json()
+            cats  = response_cats.json()
+            return render_template('cats.html',foods=foods,cats=cats, activeElement='Cats')
+        else:
+            return jsonify({"message": "Failed to get data."}), 500
+    except:
+        print("An Error occured")
+        return jsonify({"message": "Failed to get data."}), 500
 
 @app.route('/feeding')
 def feeding():
