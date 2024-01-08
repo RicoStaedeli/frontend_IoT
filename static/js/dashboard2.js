@@ -61,6 +61,7 @@ var config_chart = {
                 {
                     ticks: {
                         fontColor: "rgba(255,255,255,.7)",
+                        beginAtZero: true
                     },
                     display: true,
                     scaleLabel: {
@@ -267,9 +268,6 @@ async function createPoopsGraph(baseConfigChart) {
     config_poops.data.datasets[0].data = weights_poops;
 
     config_poops.data.datasets[0].type = "bar";
-
-    console.log(baseConfigChart)
-    console.log(config_poops)
 
     var ctx = document.getElementById("line-chart-poop").getContext("2d");
     new Chart(ctx, config_poops);
