@@ -32,7 +32,7 @@ def sensors():
 
 @app.route('/weightsensor')
 def weightsensor():
-    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/poop/1"
+    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/poops"
     try:
         response = requests.get(api_url)
         if response.status_code == 200:
@@ -143,9 +143,10 @@ def submit_feeding():
 
     feeiding_entry = {
         'food_ID': id_food,
-        'cat_ID': id_cat
-        #'time': food_time
+        'cat_ID': id_cat,
+        'timestamp': food_time
     }
+    
 
     # Post the data to the specified URL
     url = "https://poop-tracker-48b06530794b.herokuapp.com/feedings/"

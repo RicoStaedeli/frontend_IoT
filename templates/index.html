@@ -49,8 +49,8 @@
                 </div>
                 <div class="basis-1/2">
 
-                    <img src="{{ url_for('static', filename='ressources/twillio_qr.svg') }}" class="mx-auto h-60 w-fit p-4"
-                        alt="Image of Twillio Sandbox">
+                    <img src="{{ url_for('static', filename='ressources/twillio_qr.svg') }}"
+                        class="mx-auto h-60 w-fit p-4" alt="Image of Twillio Sandbox">
                 </div>
             </section>
         </div>
@@ -59,9 +59,17 @@
             <hr>
             <section>
                 <div>
-                    <p>Weight Sensor: 100000</p>
-                    <p>Gas Sensor: 100000</p>
+                    <div>
+                        <p>Weight Sensor: </p>
+                        <p name="weight_sensor" id="weight_sensor">10000</p>
+                    </div>
+                    <div>
+                        <p>Gas Sensor: </p>
+                        <p name="gas_sensor" id="gas_sensor">10000</p>
+                    </div>
                 </div>
+
+                <button onclick="sendMessage()">Send WS</button>
             </section>
         </div>
     </div>
@@ -131,4 +139,5 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" charset="utf-8"></script>
 <script src="../static/js/dashboard2.js"></script>
+<script src="../static/js/websocket_index.js"></script>
 {% endblock %}
