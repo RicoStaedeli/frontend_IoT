@@ -6,20 +6,30 @@ ws.onmessage = function (event) {
     console.log(event.data)
     try {
         data = JSON.parse(event.data);
-        if (data.type == "weightSensorValue") {
+        if (data.type == "poop") {
 
         }
-        if (data.type == "gasSensorValue") {
+        else if (data.type == "liveWeight") {
+            document.getElementById('weight_sensor').textContent = data.weight;
+        }
+        else if (data.type == "liveGasValue") {
+            document.getElementById('gas_sensor_smoke').textContent = data.smoke;
+            document.getElementById('gas_sensor_co').textContent = data.co;
+            document.getElementById('gas_sensor_lpg').textContent = data.lpg;
+        }
+        else if (data.type == "airQuality") {
 
         }
     } catch (error) {
-        console.error(error);
+        //console.error(error);
     }
-
-
 };
 
 function sendMessage() {
     var input = "testmessage"
     ws.send(input)
+}
+
+function changeValues(){
+    document.getElementById('weight_sensor').textContent = "69";
 }

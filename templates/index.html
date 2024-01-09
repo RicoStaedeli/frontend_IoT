@@ -5,7 +5,7 @@
     <h1 class="text-4xl text-black dark:text-white font-bold tracking-tight text-gray-900 pl-4 pt-4">{% block title %}
         The Poop
         dashboard {% endblock %}</h1>
-    <p class="pl-4 text-lg">Track your cats health and manage her food.</p>
+    <p class="pl-4 text-lg">Track your cats health and manage her feeding.</p>
     <div class="grid grid-cols-2 ">
         <div class="justify-items-start dark:bg-slate-400 p-4 m-4 rounded-lg shadow-2xl">
             <h1 class="text-xl font-bold tracking-tight text-gray-900">Subscribe for your cats health</h1>
@@ -58,19 +58,31 @@
             <h1 class="text-xl font-bold tracking-tight text-gray-900">Current sensor values</h1>
             <hr>
             <section>
-                <div>
-                    <div>
+                <div class="pb-10">
+                    <div class="flex flex-row pb-4">
                         <p>Weight Sensor: </p>
-                        <p name="weight_sensor" id="weight_sensor">10000</p>
+                        <p name="weight_sensor" id="weight_sensor" class="pl-4 font-bold">10000</p>
+                        <p  class="pl-1 font-bold">Grams</p>
                     </div>
                     <div>
                         <p>Gas Sensor: </p>
-                        <p name="gas_sensor" id="gas_sensor">10000</p>
+                        <div class="flex flex-row">
+                            <label for="gas_sensor_smoke" class="">Smoke:</label>
+                            <p name="gas_sensor_smoke" id="gas_sensor_smoke" class="pl-2 font-bold"> 10000</p>
+
+                            <label for="gas_sensor_co" class="pl-2">CO:</label>
+                            <p name="gas_sensor_co" id="gas_sensor_co" class="pl-2 font-bold"> 10000</p>
+
+                            <label for="gas_sensor_lpg" class="pl-2">LPG:</label>
+                            <p name="gas_sensor_lpg" id="gas_sensor_lpg" class="pl-2 font-bold"> 10000</p>
+
+                        </div>
+
                     </div>
                 </div>
-
-                <button onclick="sendMessage()">Send WS</button>
-            </section>
+                </section>
+                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-5" onclick="sendMessage()">Check WebSocket Connection</button>
+            
         </div>
     </div>
 
@@ -138,6 +150,6 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" charset="utf-8"></script>
-<script src="../static/js/dashboard2.js"></script>
+<script src="../static/js/dashboard.js"></script>
 <script src="../static/js/websocket_index.js"></script>
 {% endblock %}

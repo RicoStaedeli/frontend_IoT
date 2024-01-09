@@ -30,19 +30,6 @@ def sensors():
     except:
         return render_template('sensors.html',poops=[], activeElement='Sensors')
 
-@app.route('/weightsensor')
-def weightsensor():
-    api_url = "https://poop-tracker-48b06530794b.herokuapp.com/poops"
-    try:
-        response = requests.get(api_url)
-        if response.status_code == 200:
-            sensordata = response.json()
-            return render_template('WeightSensor.html',poop=sensordata['weight'], activeElement='Sensors')
-        else:
-            return render_template('WeightSensor.html',weightSensorValue=0, activeElement='Sensors')
-    except:
-        print("An Error occured")
-        return render_template('WeightSensor.html',weightSensorValue=0, activeElement='Sensors')
 
 @app.route('/food')
 def food():
