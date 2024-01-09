@@ -24,7 +24,7 @@
     "feeding_ID": 1
   }
 ]*/
-
+/*
 const inputJSON = [
   {
     "ID_cat": 1,
@@ -124,6 +124,7 @@ function aggregateWeightByDay(data) {
 
 /* Chart initialisations */
 /* Line Chart */
+/*
 var config = {
   type: "line",
   data: {
@@ -588,3 +589,5 @@ async function createPoopsGraph() {
 }
 
 createPoopsGraph()
+
+*/

@@ -1,6 +1,6 @@
 var client_id = Date.now()
 
-var ws = new WebSocket(`ws://poop-tracker-48b06530794b.herokuapp.com/ws/${client_id}`);
+var ws = new WebSocket(`wss://poop-tracker-48b06530794b.herokuapp.com/ws/${client_id}`);
 
 ws.onmessage = function (event) {
     console.log(event.data)
