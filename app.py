@@ -82,11 +82,6 @@ def feeding():
         print("An Error occured")
         return jsonify({"message": "Failed to load data."}), 500
 
-# ###############################
-# Helper Methods
-# ###############################
-
-
 
 # ###############################
 # Endpoints to push data

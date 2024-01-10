@@ -22,13 +22,16 @@ ws.onmessage = function (event) {
         else if (data.type == "airQuality") {
 
         }
+        else if (data.type == "message"){
+            var messages = document.getElementById('messages')
+            var message = document.createElement('li')
+            textMessage = data.client_id + " sais: " + data.message;
+            var content = document.createTextNode(textMessage)
+            message.appendChild(content)
+            messages.appendChild(message)
+        }
     } catch (error) {
-        //console.error(error);
-        var messages = document.getElementById('messages')
-        var message = document.createElement('li')
-        var content = document.createTextNode(event.data)
-        message.appendChild(content)
-        messages.appendChild(message)
+        console.error(error);
     }
 };
 
