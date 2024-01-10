@@ -14,9 +14,9 @@ ws.onmessage = function (event) {
             addDataToWeightChart(data)
         }
         else if (data.type == "liveGasValue") {
-            document.getElementById('gas_sensor_smoke').textContent = data.smoke;
-            document.getElementById('gas_sensor_co').textContent = data.co;
-            document.getElementById('gas_sensor_lpg').textContent = data.lpg;
+            document.getElementById('gas_sensor_smoke').textContent = data.smoke + "‰";
+            document.getElementById('gas_sensor_co').textContent = data.co + "‰";
+            document.getElementById('gas_sensor_lpg').textContent = data.lpg + "‰";
             addDataToGasChart(data)
         }
         else if (data.type == "airQuality") {
@@ -25,7 +25,7 @@ ws.onmessage = function (event) {
         else if (data.type == "message"){
             var messages = document.getElementById('messages')
             var message = document.createElement('li')
-            textMessage = data.client_id + " sais: " + data.message;
+            textMessage = "Client " + data.client_id + " sais: " + data.message;
             var content = document.createTextNode(textMessage)
             message.appendChild(content)
             messages.appendChild(message)
