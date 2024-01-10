@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div onload="setActive('item1')">
+<div>
     <h1 class="text-4xl text-black dark:text-white font-bold tracking-tight text-gray-900 pl-4 pt-4">{% block title %}
         The Poop
         dashboard {% endblock %}</h1>
@@ -44,7 +44,7 @@
                         <br>
 
                         <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Subscribe</button>
+                            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-5">Subscribe</button>
                     </form>
                 </div>
                 <div class="basis-1/2">
@@ -62,7 +62,7 @@
                     <div class="flex flex-row pb-4">
                         <p>Weight Sensor: </p>
                         <p name="weight_sensor" id="weight_sensor" class="pl-4 font-bold">10000</p>
-                        <p  class="pl-1 font-bold">Grams</p>
+                        <p class="pl-1 font-bold">Grams</p>
                     </div>
                     <div>
                         <p>Gas Sensor: </p>
@@ -80,9 +80,26 @@
 
                     </div>
                 </div>
-                </section>
-                <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-5" onclick="sendMessage()">Check WebSocket Connection</button>
-            
+            </section>
+            <div class="flex flex-row">
+                <div class="basis-1/2">
+                    <label for="Broadcast" class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
+                        Broadcast Message</label>
+                    <input name="Broadcast" type="text" id="Broadcast"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required>
+                    <button type="button"
+                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-5 mt-2"
+                        onclick="sendBroadcast()">Send Broadcast</button>
+                </div>
+                <div class="basis-1/2 pl-3 ">
+                    <p class="block mb-2 text-lg font-medium text-gray-900 dark:text-white">Broadcast Messages</p>
+                    <div class="overflow-auto h-40">
+                        <ul id='messages'></ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

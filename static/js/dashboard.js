@@ -1,3 +1,7 @@
+var PoopChart;
+var WeightChart;
+var GasChart;
+
 var config_chart = {
     data: {
         labels: [],
@@ -86,10 +90,10 @@ var config_chart = {
 
 
 function aggregatePoopWeightByDay(data) {
-    const aggregatedData = {};
+    aggregatedData = {};
 
     data.forEach(item => {
-        const date = item.timestamp.split('T')[0]; // Extract the date part
+        date = item.timestamp.split('T')[0]; // Extract the date part
         if (aggregatedData[date]) {
             aggregatedData[date] += item.weight;
         } else {
@@ -247,7 +251,7 @@ async function createWeightGraph(baseConfigChart) {
 
 
     var ctx2 = document.getElementById("line-chart-cat").getContext("2d");
-    new Chart(ctx2, config_weights);
+    WeightChart = new Chart(ctx2, config_weights);
 
 }
 
@@ -270,7 +274,8 @@ async function createPoopsGraph(baseConfigChart) {
     config_poops.data.datasets[0].type = "bar";
 
     var ctx = document.getElementById("line-chart-poop").getContext("2d");
-    new Chart(ctx, config_poops);
+    PoopChart = new Chart(ctx, config_poops);
+
 }
 
 ////////////
@@ -365,7 +370,7 @@ async function createAirGraph(baseConfigChart) {
     })
 
     var ctx = document.getElementById("line-chart-gas").getContext("2d");
-    new Chart(ctx, config_data_air);
+    GasChart = new Chart(ctx, config_data_air);
 }
 
 createPoopsGraph(config_chart)
