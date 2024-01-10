@@ -37,26 +37,10 @@ function sendBroadcast() {
     ws.send(input)
 }
 
-function changeValues() {
-    document.getElementById('weight_sensor').textContent = "69";
-}
-
-function getPopSocketMessage() {
-    stringMessage = '{"ID_poop": 0, "weight": 77, "timestamp": "2024-01-10T07:40:48", "feeding_ID": 10, "type": "poop"}'
-    data = JSON.parse(stringMessage);
-    return data
-}
-
-function simulatePoopEntry() {
-    data = getPopSocketMessage();
-    let canvas = document.querySelector('#line-chart-poop');
-    addDataToPoopChart(data);
-}
-
 
 function addDataToPoopChart(newData) {
 
-    day = newData.timestamp.split('T')[0];
+    day = newData.timestamp;
     weight = newData.weight
     PoopChart.data.labels.push(day);
     PoopChart.data.datasets[0].data.push(weight);
@@ -68,7 +52,8 @@ function addDataToWeightChart(newData) {
 
     //day =  newData.timestamp.split('T')[0];
     weight = newData.weight
-    WeightChart.data.labels.push("WS");
+    day = newData.timestamp;
+    WeightChart.data.labels.push(day);
     WeightChart.data.datasets[0].data.push(weight);
 
     WeightChart.update();
