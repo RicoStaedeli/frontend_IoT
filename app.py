@@ -1,11 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import requests
-from flask_socketio import SocketIO, emit
     
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
-
 
 # ###############################
 # HTML Endpoints
@@ -85,8 +81,71 @@ def feeding():
     except:
         print("An Error occured")
         return jsonify({"message": "Failed to load data."}), 500
+    
+@app.route('/analysis')
+def analysis():
+    api_url_poops = "https://poop-tracker-48b06530794b.herokuapp.com/poops/"
+    api_url_feedings = "https://poop-tracker-48b06530794b.herokuapp.com/feedings/"
+    try:
+        response_poops= requests.get(api_url_poops)
+        response_feedings= requests.get(api_url_feedings)
+        if response_poops.status_code == 200:
+            feedings = response_feedings.json()
+            poops = response_poops.json()
+            data = join_by_feeding_id(feedings,poops)
+            health_infos = totalizePerFood(data)
+            return render_template('analysis.html',poops=data, health_infos = health_infos, activeElement='Analysis')
+        else:
+            return jsonify({"message": "Failed to load data."}), 500
+    except:
+        print("An Error occured")
+        return jsonify({"message": "Failed to load data."}), 500
 
 
+# Function to join feedings and poops by feeding ID
+def join_by_feeding_id(feedings, poops):
+    feeding_dict = {feeding["ID_feeding"]: feeding for feeding in feedings}
+
+    # Join poops with their corresponding feeding record, keeping both timestamps
+    joined_data_with_timestamps = []
+    for poop in poops:
+        feeding_id = poop["feeding_ID"]
+        if feeding_id in feeding_dict:
+            # Renaming timestamps for clarity
+            poop_with_renamed_timestamp = {
+                "timestamp_poop": poop["timestamp"],
+                **{k: v for k, v in poop.items() if k != "timestamp"}
+            }
+            feeding_with_renamed_timestamp = {
+                "timestamp_feeding": feeding_dict[feeding_id]["timestamp"],
+                **{k: v for k, v in feeding_dict[feeding_id].items() if k != "timestamp"}
+            }
+
+            # Create a new combined record
+            combined_record = {**poop_with_renamed_timestamp, "feeding": feeding_with_renamed_timestamp}
+            joined_data_with_timestamps.append(combined_record)
+
+    return joined_data_with_timestamps
+
+def totalizePerFood(data):
+    total_weight_per_food = {}
+
+    # Iterate through the data
+    for entry in data:
+        name = entry['feeding']['food']['name']
+        weight = entry['weight']
+
+        # Add the weight to the corresponding food ID
+        if name in total_weight_per_food:
+            total_weight_per_food[name] += weight
+        else:
+            total_weight_per_food[name] = weight
+
+    # Print the total weight for each food ID
+    for name, total_weight in total_weight_per_food.items():
+        print(f"Total weight for Food ID {name}: {total_weight} grams")
+        
+    return total_weight_per_food
 # ###############################
 # Endpoints to push data
 # ###############################
@@ -188,23 +247,3 @@ def submit_cat():
     else:
         return jsonify({"message": "Failed to post data."}), 500
 
-
-######Websocket
-@socketio.event
-def my_event(message):
-    print(message)
-    emit('my response', {'data': 'got it!'})
-    
-@socketio.on('message')
-def my_event(message):
-    print(message)
-    emit('my response', {'data': 'got it!'})
-    
-@socketio.on('json')
-def my_event(message):
-    print(message)
-    emit('my response', {'data': 'got it!'})
-
-
-if __name__ == '__main__':
-    socketio.run(app)

@@ -23,33 +23,56 @@
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               {% if activeElement == "Dashboard": %}
-                <a href="{{ url_for('index')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium"> Dashboard </a>
+              <a href="{{ url_for('index')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium">
+                Dashboard </a>
               {% else %}
-                <a href="{{ url_for('index')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Dashboard </a>
+              <a href="{{ url_for('index')}}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium">
+                Dashboard </a>
               {% endif %}
-              
+
               {% if activeElement == "Sensors": %}
-                <a href="{{ url_for('sensors')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium"> Sensors </a>
+              <a href="{{ url_for('sensors')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium">
+                Sensors </a>
               {% else %}
-                <a href="{{ url_for('sensors')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Sensors </a>
+              <a href="{{ url_for('sensors')}}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium">
+                Sensors </a>
               {% endif %}
 
               {% if activeElement == "Food": %}
-                <a href="{{ url_for('food')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium"> Food </a>
+              <a href="{{ url_for('food')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium">
+                Food </a>
               {% else %}
-                <a href="{{ url_for('food')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Food </a>
+              <a href="{{ url_for('food')}}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Food
+              </a>
               {% endif %}
 
               {% if activeElement == "Feeding": %}
-                <a href="{{ url_for('feeding')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium"> Feeding </a>
+              <a href="{{ url_for('feeding')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium">
+                Feeding </a>
               {% else %}
-                <a href="{{ url_for('feeding')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Feeding </a>
+              <a href="{{ url_for('feeding')}}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium">
+                Feeding </a>
               {% endif %}
 
               {% if activeElement == "Cats": %}
-                <a href="{{ url_for('cats')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium"> Cats </a>
+              <a href="{{ url_for('cats')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium">
+                Cats </a>
               {% else %}
-                <a href="{{ url_for('cats')}}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Cats </a>
+              <a href="{{ url_for('cats')}}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Cats
+              </a>
+              {% endif %}
+              {% if activeElement == "Analysis": %}
+              <a href="{{ url_for('analysis')}}" class="bg-gray-900 text-white rounded-md px-3 py-2 text-lg font-medium">
+                Analysis </a>
+              {% else %}
+              <a href="{{ url_for('analysis')}}"
+                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-lg font-medium"> Analysis
+              </a>
               {% endif %}
             </div>
           </div>

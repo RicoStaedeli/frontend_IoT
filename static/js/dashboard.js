@@ -246,7 +246,7 @@ async function createWeightGraph(baseConfigChart) {
 
     config_weights.data.labels = chartData.timestamps_cat;
     config_weights.data.datasets[0].data = chartData.weights_cat;
-    config_weights.data.datasets[0].label = "Joe";
+    config_weights.data.datasets[0].label = "Peter";
     config_weights.data.datasets[0].type = "line";
 
 
@@ -309,7 +309,7 @@ async function createOverviewGraph(baseConfigChart) {
     //set chart config cat
     config_overview.data.labels = days_overview;
     config_overview.data.datasets[0].data = overview_catsvalues;
-    config_overview.data.datasets[0].label = "Joe";
+    config_overview.data.datasets[0].label = "Peter";
     config_overview.data.datasets[0].type = "line";
 
     //set chart config poops
