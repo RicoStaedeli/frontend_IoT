@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_sock import Sock
 import requests
 
 app = Flask(__name__)
+sock = Sock(app)
+
 
 # ###############################
 # HTML Endpoints
@@ -185,3 +188,12 @@ def submit_cat():
         return jsonify({"message": "Failed to post data."}), 500
 
 
+# ###############################
+# Websocket
+# ###############################
+@sock.route('/echo')
+def echo(sock):
+    while True:
+        data = sock.receive()
+        print(data)
+        #sock.send(data)
