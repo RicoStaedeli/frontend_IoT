@@ -197,12 +197,12 @@ def my_event(message):
     
 @socketio.on('message')
 def my_event(message):
-    print("hallo: " + message)
+    print(message)
     emit('my response', {'data': 'got it!'})
     
 @socketio.on('json')
 def my_event(message):
-    print("json: " + message)
+    print(message)
     emit('my response', {'data': 'got it!'})
 
 
