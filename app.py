@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from flask_sock import Sock
 import requests
-
+from flask_socketio import SocketIO, emit
+    
 app = Flask(__name__)
-sock = Sock(app)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
 
 
 # ###############################
@@ -188,12 +189,10 @@ def submit_cat():
         return jsonify({"message": "Failed to post data."}), 500
 
 
-# ###############################
-# Websocket
-# ###############################
-@sock.route('/echo')
-def echo(sock):
-    while True:
-        data = sock.receive()
-        print(data)
-        #sock.send(data)
+######Websocket
+@socketio.event
+def my_event(message):
+    emit('my response', {'data': 'got it!'})
+
+if __name__ == '__main__':
+    socketio.run(app)
