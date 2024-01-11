@@ -192,7 +192,19 @@ def submit_cat():
 ######Websocket
 @socketio.event
 def my_event(message):
+    print(message)
     emit('my response', {'data': 'got it!'})
+    
+@socketio.on('message')
+def my_event(message):
+    print("hallo: " + message)
+    emit('my response', {'data': 'got it!'})
+    
+@socketio.on('json')
+def my_event(message):
+    print("json: " + message)
+    emit('my response', {'data': 'got it!'})
+
 
 if __name__ == '__main__':
     socketio.run(app)
